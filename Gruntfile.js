@@ -25,7 +25,7 @@ module.exports = function(grunt) {
             src: 'static/js/*.js',
             options: {
                 verbose: true,
-                preset: 'jquery',
+                preset: 'crockford',
                 requireCurlyBraces: ['if']
             }
         }
