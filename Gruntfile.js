@@ -10,12 +10,21 @@ module.exports = function(grunt) {
         },
         jshint: {
             files: ['Gruntfile.js', 'src/*.js']
+        },
+        connect: {
+            server: {
+                options: {
+                    port: 9000,
+                    base: 'static',
+                    keepalive: true
+                }
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-serve');
+    grunt.loadNpmTasks('grunt-contrib-connect');
 
-    grunt.registerTask('default', ['jshint', 'uglify', 'serve']);
+    grunt.registerTask('default', ['jshint', 'uglify']);
 };
