@@ -2,8 +2,7 @@ var input,
     clickMp3,
     bpm,
     beatsPerMeasure,
-    currentBeatNumber,
-    numberFrames = 0;
+    currentBeatNumber;
 
 
 function preload() {
@@ -11,7 +10,7 @@ function preload() {
 }
 
 function setup() {
-    var canvas = createCanvas(710, 200);
+    var canvas = createCanvas(windowWidth - 10, 400);
 
     canvas.parent('canvas');
 
@@ -30,9 +29,13 @@ function drawWrapper(value) {
 }
 
 function draw(doClick) {
-    numberFrames += 1;
-    console.log(numberFrames);
-    ellipse(width / 2, height / 2, 70, 70);
+    //ellipse(width / 2, height / 2, 70, 70);
+    noStroke();
+    fill(175);
+    rectWidth = 100;
+    rect(width / 2 - (rectWidth / 2), 0, rectWidth, height);
+    stroke(2);
+    line(width / 2 - (rectWidth / 2), 0, width / 2 + (rectWidth / 2) - 1, 0);
 
     // do not click if called from the range updating
     if (typeof doClick !== 'undefined' && !doClick) {
