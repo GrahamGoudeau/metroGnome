@@ -1,12 +1,13 @@
 var input,
-    click,
+    clickMp3,
     bpm,
-    currentDate,
-    lastUpdate;
+    beatsPerMeasure,
+    currentBeatNumber,
+    numberFrames = 0;
 
 
 function preload() {
-    click = loadSound('static/media/clickv1.mp3');
+    clickMp3 = loadSound('static/media/clickv1.mp3');
 }
 
 function setup() {
@@ -14,33 +15,29 @@ function setup() {
 
     canvas.parent('canvas');
 
-    bpm = document.getElementById('bpm').value;
-
+    bpm = document.getElementById('bpmRange').value;
+    //beatsPerMeasure = document.getElementById('beatsPerMeasure').value;
+    currentBeatNumber = 0;
     frameRate(bpm / 60);
-    currentDate = new Date();
-    lastUpdate = currentDate.getTime();
     background(255);
 }
 
 function drawWrapper(value) {
-    var newDate = new Date(),
-        thisUpdate = newDate.getTime();
-
     frameRate(value / 60);
 
-    // Avoid annoying repeated clicks on update
-    if (thisUpdate - lastUpdate <= 500) {
+    // do not click if called from the range updating
+    draw(false);
+}
+
+function draw(doClick) {
+    numberFrames += 1;
+    console.log(numberFrames);
+    ellipse(width / 2, height / 2, 70, 70);
+
+    // do not click if called from the range updating
+    if (typeof doClick !== 'undefined' && !doClick) {
         return;
     }
 
-    lastUpdate = thisUpdate;
-
-    console.log("Updating");
-
-    draw();
-}
-
-function draw() {
-    ellipse(width / 2, height / 2, 70, 70);
-    click.play();
+    clickMp3.play();
 }

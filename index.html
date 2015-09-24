@@ -1,20 +1,19 @@
-<html>
-<head>
-  <meta charset="UTF-8">
-  <script language="javascript" type="text/javascript" src="static/p5.min.js"></script>
-  <script language="javascript" type="text/javascript" src="static/p5.sound.js"></script>
-  <script language="javascript" type="text/javascript" src="build/metroGnome.min.js"></script>
-  <!-- this line removes any default padding and style. you might only need one of these values set. -->
-  <style> body {padding: 0; margin: 0;} </style>
-</head>
-
-<body>
-Above the canvas
-<input type="range" id="bpm" onInput="drawWrapper(this.value)"
-    placeholder="BPM" min="0" max="250" step="1" value="60" style="width: 500px">
-
-    <div id="canvas">
-    </div>
-Below the canvas
-</body>
+<!doctype html>
+<html ng-app="metroGnome">
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+        <script language="javascript" type="text/javascript" src="static/p5.min.js"></script>
+        <script language="javascript" type="text/javascript" src="static/p5.sound.js"></script>
+        <script language="javascript" type="text/javascript" src="build/metroGnome.min.js"></script>
+    </head>
+    <body>
+        <div ng-controller="bpmController">
+            <input type="range" id="bpmRange" ng-model="bpmRange" ng-change="updateFromRange()" min="0" max="{{maxBpm}}" step="1" value="{{defaultBpm}}">
+            <input type="number" id="bpmNumber" ng-model="bpmNumber" ng-change="updateFromNumber()" min="0" max="{{maxBpm}}" step="1" value="{{defaultBpm}}">
+            <p>Range: {{bpmRange}} Number: {{bpmNumber}}</p>
+        </div>
+        <div id="canvas">
+        </div>
+    </body>
 </html>
