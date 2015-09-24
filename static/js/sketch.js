@@ -1,7 +1,8 @@
 var input,
-    analyzer,
     click,
-    bpm;
+    bpm,
+    currentDate,
+    lastUpdate;
 
 
 function preload() {
@@ -16,19 +17,30 @@ function setup() {
     bpm = document.getElementById('bpm').value;
 
     frameRate(bpm / 60);
+    currentDate = new Date();
+    lastUpdate = currentDate.getTime();
     background(255);
+}
 
-    // Create an Audio input
-    //input = new p5.AudioIn();
+function drawWrapper(value) {
+    var newDate = new Date(),
+        thisUpdate = newDate.getTime();
 
-    //input.start();
+    frameRate(value / 60);
+
+    // Avoid annoying repeated clicks on update
+    if (thisUpdate - lastUpdate <= 500) {
+        return;
+    }
+
+    lastUpdate = thisUpdate;
+
+    console.log("Updating");
+
+    draw();
 }
 
 function draw() {
-    bpm = document.getElementById('bpm').value;
-    console.log("New bpm:");
-    console.log(bpm / 60);
-    frameRate(bpm / 60);
     ellipse(width / 2, height / 2, 70, 70);
     click.play();
 }

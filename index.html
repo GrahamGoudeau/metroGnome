@@ -10,8 +10,9 @@
 
 <body>
 Above the canvas
-<input type="number" id="bpm" onChange="draw()" onInput="draw()"
-    placeholder="BPM" min="0" max="250" step="1" value="60">
+<input type="range" id="bpm" onInput="drawWrapper(this.value)"
+    placeholder="BPM" min="0" max="250" step="1" value="60" style="width: 500px">
+
     <div id="canvas">
     </div>
 Below the canvas
