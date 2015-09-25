@@ -9,11 +9,10 @@
     </head>
     <body>
         <div ng-controller="bpmController">
-            <input type="range" id="bpmRange" ng-model="bpmRange" ng-change="updateFromRange()" min="0" max="{{maxBpm}}" step="1" value="{{defaultBpm}}">
-            <input type="number" id="bpmNumber" ng-model="bpmNumber" ng-change="updateFromNumber()" min="0" max="{{maxBpm}}" step="1" value="{{defaultBpm}}">
-            <p>Range: {{bpmRange}} Number: {{bpmNumber}}</p>
+            <input type="range" id="bpmRange" ng-model="bpmRange.value" ng-change="updateFromRange()" min="0" max="{{maxBpm.value}}" step="1" value="{{defaultBpm.value}}">
+            <input type="number" id="bpmNumber" ng-model="bpmNumber.value" ng-change="updateFromNumber()" min="0" max="{{maxBpm.value}}" step="1" value="{{defaultBpm.value}}">
         </div>
-        <div id="canvas">
+        <div ng-controller="bpmController" id="canvas" ng-click="tapBpm()">
         </div>
     </body>
 </html>

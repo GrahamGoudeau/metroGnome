@@ -2,8 +2,10 @@ var input,
     clickMp3,
     bpm,
     beatsPerMeasure,
-    currentBeatNumber;
-
+    currentBeatNumber,
+    rectWidth = 100,
+    setTempoTaps = [],
+    initialTempoTap = null;
 
 function preload() {
     clickMp3 = loadSound('static/media/clickv1.mp3');
@@ -28,11 +30,50 @@ function drawWrapper(value) {
     draw(false);
 }
 
+/*
+function mouseClicked() {
+    // inside the rectangle
+    var newTapDate = new Date(),
+        newTapTimeRaw = newTapDate.getTime(),
+        tempoSum,
+        averageTempo,
+        numTaps = setTempoTaps.length,
+        lastSeen;
+
+    if ((mouseX >= (width / 2 - (rectWidth / 2)) &&
+            mouseX <= (width / 2 + (rectWidth / 2) - 1)) &&
+            (mouseY >= 0 && mouseY <= height)) {
+
+        if (initialTempoTap === null) {
+            console.log("Resetting");
+            initialTempoTap = newTapTimeRaw;
+            setTempoTaps = [];
+            return;
+        }
+        console.log(setTempoTaps);
+        if (numTaps === 0) {
+            setTempoTaps.push({
+                rawTime: newTapTimeRaw,
+                difference: newTapTimeRaw - initialTempoTap
+            });
+        } else {
+            lastSeen = setTempoTaps[numTaps - 1];
+            if (newTapTimeRaw - lastSeen.rawTime >= 2500) {
+                setTempoTaps = [];
+                return;
+            }
+            setTempoTaps.push({
+                rawTime: newTapTimeRaw,
+                difference: newTapTimeRaw - lastSeen.rawTime
+            });
+        }
+    }
+}
+*/
 function draw(doClick) {
     //ellipse(width / 2, height / 2, 70, 70);
     noStroke();
     fill(175);
-    rectWidth = 100;
     rect(width / 2 - (rectWidth / 2), 0, rectWidth, height);
     stroke(2);
     line(width / 2 - (rectWidth / 2), 0, width / 2 + (rectWidth / 2) - 1, 0);
@@ -42,5 +83,5 @@ function draw(doClick) {
         return;
     }
 
-    clickMp3.play();
+    //clickMp3.play();
 }
