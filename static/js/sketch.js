@@ -83,5 +83,5 @@ function draw(doClick) {
         return;
     }
 
-    //clickMp3.play();
+    clickMp3.play();
 }

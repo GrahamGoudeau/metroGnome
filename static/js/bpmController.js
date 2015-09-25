@@ -27,7 +27,10 @@ angular.module('metroGnome', [])
             var newTapDate = new Date(),
                 newTapTimeRaw = newTapDate.getTime(),
                 numTaps = sc.setTempoTaps.length,
-                lastSeen;
+                lastSeen,
+                total,
+                newRate,
+                currentTimeStamp;
 
             if (sc.initialTempoTap === null) {
                 sc.initialTempoTap = newTapTimeRaw;
@@ -43,8 +46,9 @@ angular.module('metroGnome', [])
                 return;
             } else {
                 lastSeen = sc.setTempoTaps[numTaps - 1];
-                if (newTapTimeRaw - lastSeen.rawTime >= 2500) {
+                if (numTaps >= 5 || newTapTimeRaw - lastSeen.rawTime >= 2500) {
                     sc.setTempoTaps = [];
+                    numTaps = 0;
                     sc.initialTempoTap = newTapTimeRaw;
                     return;
                 }
@@ -53,10 +57,17 @@ angular.module('metroGnome', [])
                     difference: newTapTimeRaw - lastSeen.rawTime
                 });
             }
+            total = 0;
+            for (currentTimeStamp in sc.setTempoTaps) {
+                total += sc.setTempoTaps[currentTimeStamp].difference;
+            }
+
+            newRate = floor(60 / (total / (numTaps + 1) / 1000));
             // ensure that the page is aware of the scope updates
             timeout(function () {
-                this.bpmNumber.value = Number(0);
-                this.bpmRange.value = 0;
+                this.bpmNumber.value = Number(newRate);
+                this.bpmRange.value = newRate;
+                drawWrapper(newRate);
             });
         };
 
