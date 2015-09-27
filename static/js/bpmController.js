@@ -63,8 +63,12 @@ angular.module('metroGnome', [])
             }
 
             newRate = floor(60 / (total / (numTaps + 1) / 1000));
+
             // ensure that the page is aware of the scope updates
             timeout(function () {
+                if (newRate > sc.maxBpm.value) {
+                    newRate = sc.maxBpm.value;
+                }
                 this.bpmNumber.value = Number(newRate);
                 this.bpmRange.value = newRate;
                 drawWrapper(newRate);
