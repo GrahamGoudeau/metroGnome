@@ -1,5 +1,6 @@
 angular.module('metroGnome', [])
     .controller('bpmController', ['$scope', '$timeout', function (sc, timeout) {
+        // bind scope variables to objects rather than primitives
         sc.defaultBpm = {value: 60};
         sc.maxBpm = {value: 250};
         sc.bpmNumber = {value: 60};
@@ -17,7 +18,6 @@ angular.module('metroGnome', [])
                 sc.bpmRange.value = sc.maxBpm.value;
                 return;
             }
-            //sc.bpmRange.value = Number(sc.bpmNumber.value);
             sc.bpmRange.value = Number(this.bpmNumber.value);
 
             drawWrapper(this.bpmRange.value);

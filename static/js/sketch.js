@@ -17,7 +17,6 @@ function setup() {
     canvas.parent('canvas');
 
     bpm = document.getElementById('bpmRange').value;
-    //beatsPerMeasure = document.getElementById('beatsPerMeasure').value;
     currentBeatNumber = 0;
     frameRate(bpm / 60);
     background(255);
