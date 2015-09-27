@@ -7,10 +7,12 @@ angular.module('metroGnome', [])
         sc.bpmRange = {value: 60};
         sc.setTempoTaps = [];
         sc.initialTempoTap = null;
+        sc.buttonText = 'Start metroGnome';
+        clickActive = false;
 
         sc.updateFromRange = function () {
             sc.bpmNumber.value = Number(sc.bpmRange.value);
-            drawWrapper(sc.bpmNumber.value);
+            frameRate(sc.bpmNumber.value / 60);
         };
 
         sc.updateFromNumber = function () {
@@ -20,7 +22,17 @@ angular.module('metroGnome', [])
             }
             sc.bpmRange.value = Number(this.bpmNumber.value);
 
-            drawWrapper(this.bpmRange.value);
+            frameRate(sc.bpmRange.value / 60);
+        };
+
+        sc.toggleClicking = function () {
+            if (clickActive) {
+                clickActive = false;
+                sc.buttonText = 'Start metroGnome';
+            } else {
+                clickActive = true;
+                sc.buttonText = 'Stop metroGnome';
+            }
         };
 
         sc.tapBpm = function () {
@@ -71,7 +83,7 @@ angular.module('metroGnome', [])
                 }
                 this.bpmNumber.value = Number(newRate);
                 this.bpmRange.value = newRate;
-                drawWrapper(newRate);
+                frameRate(newRate / 60);
             });
         };
 

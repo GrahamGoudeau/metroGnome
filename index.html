@@ -11,26 +11,30 @@
     </head>
     <body>
         <h1>metroGnome</h1>
+        <h2>Graham Goudeau</h2>
         <div ng-controller="bpmController">
             <div ng-controller="bpmController" id="canvas" ng-click="tapBpm()">
             </div>
+            <button ng-click="toggleClicking()">{{buttonText}}</button>
             <input type="range" id="bpmRange" ng-model="bpmRange.value" ng-change="updateFromRange()" min="0" max="{{maxBpm.value}}" step="1" value="{{defaultBpm.value}}" style="width: 200px">
             <input type="number" id="bpmNumber" ng-model="bpmNumber.value" ng-change="updateFromNumber()" min="0" max="{{maxBpm.value}}" step="1" value="{{defaultBpm.value}}">
             <div></div>
             <input type="checkbox" id="hasTimeSig" ng-model="hasTimeSig">
             <label for="hasTimeSig">Use time signature?</label>
             <div ng-if="hasTimeSig">
-                <p><select>
+                <p><select ng-model="beatsPerMeasure">
                     <option value="4">4</option>
                     <option value="5">5</option>
                     <option value="6">6</option>
                     <option value="7">7</option>
                 </select>
                 /
-                <select>
+                <select ng-model="beatDivision">
                     <option value="4">4</option>
                     <option value="8">8</option>
                 <select>
+
+                {{beatsPerMeasure}} / {{beatDivision}}
                 </p>
             </div>
         </div>
