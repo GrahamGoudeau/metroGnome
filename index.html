@@ -10,11 +10,29 @@
         <script language="javascript" type="text/javascript" src="build/metroGnome.min.js"></script>
     </head>
     <body>
+        <h1>metroGnome</h1>
         <div ng-controller="bpmController">
+            <div ng-controller="bpmController" id="canvas" ng-click="tapBpm()">
+            </div>
             <input type="range" id="bpmRange" ng-model="bpmRange.value" ng-change="updateFromRange()" min="0" max="{{maxBpm.value}}" step="1" value="{{defaultBpm.value}}" style="width: 200px">
             <input type="number" id="bpmNumber" ng-model="bpmNumber.value" ng-change="updateFromNumber()" min="0" max="{{maxBpm.value}}" step="1" value="{{defaultBpm.value}}">
-        </div>
-        <div ng-controller="bpmController" id="canvas" ng-click="tapBpm()">
+            <div></div>
+            <input type="checkbox" id="hasTimeSig" ng-model="hasTimeSig">
+            <label for="hasTimeSig">Use time signature?</label>
+            <div ng-if="hasTimeSig">
+                <p><select>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+                /
+                <select>
+                    <option value="4">4</option>
+                    <option value="8">8</option>
+                <select>
+                </p>
+            </div>
         </div>
     </body>
 </html>
