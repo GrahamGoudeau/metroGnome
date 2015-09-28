@@ -8,14 +8,14 @@
         <script language="javascript" type="text/javascript" src="static/p5.min.js"></script>
         <script language="javascript" type="text/javascript" src="static/p5.sound.js"></script>
         <script language="javascript" type="text/javascript" src="build/metroGnome.min.js"></script>
+        <link rel="stylesheet" href="static/css/index.css">
     </head>
     <body>
-        <h1>metroGnome</h1>
-        <h2>Graham Goudeau</h2>
+        <!--<h1>metroGnome</h1>-->
         <div ng-controller="bpmController">
             <div ng-controller="bpmController" id="canvas" ng-click="tapBpm()">
             </div>
-            <button ng-click="toggleClicking()">{{buttonText}}</button>
+            <button class="noselect" ng-click="toggleClicking()">{{buttonText}}</button>
             <input type="range" id="bpmRange" ng-model="bpmRange.value" ng-change="updateFromRange()" min="0" max="{{maxBpm.value}}" step="1" value="{{defaultBpm.value}}" style="width: 200px">
             <input type="number" id="bpmNumber" ng-model="bpmNumber.value" ng-change="updateFromNumber()" min="0" max="{{maxBpm.value}}" step="1" value="{{defaultBpm.value}}">
             <div></div>
@@ -28,7 +28,6 @@
                     <option value="6">6</option>
                     <option value="7">7</option>
                 </select>
-                /
                 <select ng-model="beatDivision">
                     <option value="4">4</option>
                     <option value="8">8</option>

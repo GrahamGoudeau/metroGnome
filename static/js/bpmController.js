@@ -58,6 +58,10 @@ angular.module('metroGnome', [])
                 return;
             } else {
                 lastSeen = sc.setTempoTaps[numTaps - 1];
+
+                // keep the number of items averaged low to keep the
+                // average fluid; if it has been more than 2.5 seconds since
+                // the last tap, reset
                 if (numTaps >= 5 || newTapTimeRaw - lastSeen.rawTime >= 2500) {
                     sc.setTempoTaps = [];
                     numTaps = 0;
@@ -74,6 +78,7 @@ angular.module('metroGnome', [])
                 total += sc.setTempoTaps[currentTimeStamp].difference;
             }
 
+            // determine the new bpm
             newRate = floor(60 / (total / (numTaps + 1) / 1000));
 
             // ensure that the page is aware of the scope updates
