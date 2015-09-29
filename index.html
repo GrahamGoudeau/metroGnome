@@ -2,8 +2,8 @@
 <html ng-app="metroGnome">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
+        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
         <script language="javascript" type="text/javascript" src="static/p5.min.js"></script>
         <script language="javascript" type="text/javascript" src="static/p5.sound.js"></script>
@@ -12,7 +12,7 @@
     </head>
     <body>
         <!--<h1>metroGnome</h1>-->
-        <div ng-controller="bpmController">
+        <div class="noselect" ng-controller="bpmController">
             <div ng-controller="bpmController" id="canvas" ng-click="tapBpm()">
             </div>
             <button class="noselect" ng-click="toggleClicking()">{{buttonText}}</button>
@@ -21,19 +21,21 @@
             <div></div>
             <input type="checkbox" id="hasTimeSig" ng-model="hasTimeSig">
             <label for="hasTimeSig">Use time signature?</label>
-            <div ng-if="hasTimeSig">
-                <p><select ng-model="beatsPerMeasure">
+            <div ng-show="hasTimeSig">
+                <p><select id="beatsPerMeasure" ng-model="beatsPerMeasure.value">
+                    <option value="">Beats per measure</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
                     <option value="6">6</option>
                     <option value="7">7</option>
                 </select>
-                <select ng-model="beatDivision">
+                <select id="beatDivision" ng-model="beatDivision.value">
+                    <option value="">Beat division</option>
                     <option value="4">4</option>
                     <option value="8">8</option>
                 <select>
 
-                {{beatsPerMeasure}} / {{beatDivision}}
+                {{beatsPerMeasure.value}} / {{beatDivision.value}}
                 </p>
             </div>
         </div>

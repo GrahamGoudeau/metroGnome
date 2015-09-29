@@ -10,7 +10,8 @@ module.exports = function(grunt) {
         },
         jshint: {
             jshintrc: '.jshintrc',
-            files: ['Gruntfile.js', 'static/js/*.js']
+            //files: ['Gruntfile.js', 'static/js/*.js']
+            files: 'static/js/*.js'
         },
         connect: {
             server: {

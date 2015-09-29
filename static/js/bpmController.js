@@ -7,7 +7,19 @@ angular.module('metroGnome', [])
         sc.bpmRange = {value: 60};
         sc.setTempoTaps = [];
         sc.initialTempoTap = null;
-        sc.buttonText = 'Start metroGnome';
+        //sc.buttonText = 'Start metroGnome';
+        sc.buttonText = 'Start';
+
+        sc.beatsPerMeasure = {
+            //value: undefined
+            value: undefined
+        };
+        sc.beatDivision = {
+            //value: undefined
+            value: undefined
+        };
+
+        // set the value of the bool defined in sketch.js
         clickActive = false;
 
         sc.updateFromRange = function () {
