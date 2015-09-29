@@ -6,7 +6,8 @@ var input,
     rectWidth = 100,
     setTempoTaps = [],
     initialTempoTap = null,
-    clickActive = false;
+    clickActive = false,
+    numClicks;
 
 function preload() {
     clickMp3 = loadSound('static/media/clickv1.mp3');
@@ -14,6 +15,8 @@ function preload() {
 
 function setup() {
     var canvas = createCanvas(windowWidth - 10, 400);
+
+    numClicks = 0;
 
     canvas.parent('canvas');
 
@@ -24,6 +27,9 @@ function setup() {
 }
 
 function draw(doClick) {
+    var beatsPerMeasure = document.getElementById('beatsPerMeasure').value,
+        hasTimeSig = document.getElementById('hasTimeSig').checked;
+
     //ellipse(width / 2, height / 2, 70, 70);
     noStroke();
     fill(175);
@@ -36,8 +42,18 @@ function draw(doClick) {
         return;
     }
 
-    console.log("About to click: ", doClick);
+    //console.log("About to click: ", doClick);
     if (clickActive) {
+        console.log(hasTimeSig);
+        if (!hasTimeSig || !beatsPerMeasure) {
+            clickMp3.amp(1);
+        } else if (beatsPerMeasure && numClicks % beatsPerMeasure === 0) {
+            clickMp3.amp(2);
+        } else {
+            clickMp3.amp(0.5);
+        }
+
         clickMp3.play();
+        numClicks += 1;
     }
 }
