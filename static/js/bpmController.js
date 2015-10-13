@@ -7,15 +7,12 @@ angular.module('metroGnome', [])
         sc.bpmRange = {value: 60};
         sc.setTempoTaps = [];
         sc.initialTempoTap = null;
-        //sc.buttonText = 'Start metroGnome';
-        sc.buttonText = 'Start';
+        sc.buttonText = 'Start metroGnome';
 
         sc.beatsPerMeasure = {
-            //value: undefined
             value: undefined
         };
         sc.beatDivision = {
-            //value: undefined
             value: undefined
         };
 

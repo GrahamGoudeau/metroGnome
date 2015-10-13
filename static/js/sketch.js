@@ -28,25 +28,38 @@ function setup() {
 
 function draw(doClick) {
     var beatsPerMeasure = document.getElementById('beatsPerMeasure').value,
-        hasTimeSig = document.getElementById('hasTimeSig').checked;
+        hasTimeSig = document.getElementById('hasTimeSig').checked,
+        multiple;
 
-    //ellipse(width / 2, height / 2, 70, 70);
+    // clear the background on redraw
+    background(255);
+    stroke(50);
+
+    /*
     noStroke();
     fill(175);
     rect(width / 2 - (rectWidth / 2), 0, rectWidth, height);
     stroke(2);
     line(width / 2 - (rectWidth / 2), 0, width / 2 + (rectWidth / 2) - 1, 0);
+    */
 
     // do not click if called from the range updating
     if (typeof doClick !== 'undefined' && !doClick) {
         return;
     }
 
-    //console.log("About to click: ", doClick);
     if (clickActive) {
-        console.log(hasTimeSig);
+        if (hasTimeSig) {
+            // draw lines in canvas
+            for (multiple = 0; multiple < beatsPerMeasure; multiple++) {
+                line(width / beatsPerMeasure * multiple,
+                     0,
+                     width / beatsPerMeasure * multiple, height);
+            }
+        }
         if (!hasTimeSig || !beatsPerMeasure) {
             clickMp3.amp(1);
+            beatsPerMeasure = 0;
         } else if (beatsPerMeasure && numClicks % beatsPerMeasure === 0) {
             clickMp3.amp(2);
         } else {
@@ -55,5 +68,7 @@ function draw(doClick) {
 
         clickMp3.play();
         numClicks += 1;
+    } else {
+        beatsPerMeasure = 0;
     }
 }
