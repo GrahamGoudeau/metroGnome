@@ -11,32 +11,38 @@
         <link rel="stylesheet" href="static/css/index.css">
     </head>
     <body>
-        <!--<h1>metroGnome</h1>-->
-        <div class="noselect" ng-controller="bpmController">
+        <h1>metroGnome</h1>
+        <div class="noselect" id="mainAngular" ng-controller="bpmController">
             <div ng-controller="bpmController" id="canvas" ng-click="tapBpm()">
             </div>
             <button class="noselect" ng-click="toggleClicking()">{{buttonText}}</button>
             <input type="range" id="bpmRange" ng-model="bpmRange.value" ng-change="updateFromRange()" min="0" max="{{maxBpm.value}}" step="1" value="{{defaultBpm.value}}" style="width: 200px">
             <input type="number" id="bpmNumber" ng-model="bpmNumber.value" ng-change="updateFromNumber()" min="0" max="{{maxBpm.value}}" step="1" value="{{defaultBpm.value}}">
             <div></div>
-            <input type="checkbox" id="hasTimeSig" ng-model="hasTimeSig">
-            <label for="hasTimeSig">Use time signature?</label>
-            <div ng-show="hasTimeSig">
-                <p><select id="beatsPerMeasure" ng-model="beatsPerMeasure.value">
-                    <option value="">Beats per measure</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                </select>
-                <select id="beatDivision" ng-model="beatDivision.value">
-                    <option value="">Beat division</option>
-                    <option value="4">4</option>
-                    <option value="8">8</option>
-                <select>
+            <div ng-show="beatsPerMeasure.value > 2 && hasTimeSig">
+            Beat: {{numClicks}}<br>
+            </div>
+            <div ng-show="clickActive">
+                <input type="checkbox" id="hasTimeSig" ng-model="hasTimeSig">
+                <label for="hasTimeSig">Use time signature?</label>
+                <div ng-show="hasTimeSig">
+                    <p><select id="beatsPerMeasure" ng-model="beatsPerMeasure.value">
+                        <option value="">Beats per measure</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                    </select>
+                    <select id="beatDivision" ng-model="beatDivision.value">
+                        <option value="">Beat division</option>
+                        <option value="4">4</option>
+                        <option value="8">8</option>
+                    <select>
 
-                {{beatsPerMeasure.value}} / {{beatDivision.value}}
-                </p>
+                    {{beatsPerMeasure.value}} / {{beatDivision.value}}
+                    </p>
+                </div>
             </div>
         </div>
     </body>

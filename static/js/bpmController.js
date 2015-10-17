@@ -8,6 +8,9 @@ angular.module('metroGnome', [])
         sc.setTempoTaps = [];
         sc.initialTempoTap = null;
         sc.buttonText = 'Start metroGnome';
+        sc.numClicks = numClicks;
+        clickActive = false;
+        sc.clickActive = clickActive;
 
         sc.beatsPerMeasure = {
             value: undefined
@@ -17,7 +20,6 @@ angular.module('metroGnome', [])
         };
 
         // set the value of the bool defined in sketch.js
-        clickActive = false;
 
         sc.updateFromRange = function () {
             sc.bpmNumber.value = Number(sc.bpmRange.value);
@@ -35,13 +37,18 @@ angular.module('metroGnome', [])
         };
 
         sc.toggleClicking = function () {
+            if (typeof sc.numClicks === 'undefined') {
+                sc.numClicks = numClicks;
+            }
             if (clickActive) {
                 clickActive = false;
                 sc.buttonText = 'Start metroGnome';
+                sc.resetOptions();
             } else {
                 clickActive = true;
                 sc.buttonText = 'Stop metroGnome';
             }
+            sc.clickActive = clickActive;
         };
 
         sc.tapBpm = function () {
@@ -99,6 +106,14 @@ angular.module('metroGnome', [])
                 this.bpmRange.value = newRate;
                 frameRate(newRate / 60);
             });
+        };
+
+        sc.updateClicks = function (click) {
+            sc.numClicks = click;
+        };
+
+        sc.resetOptions = function () {
+            sc.hasTimeSig = false;
         };
 
     }]);

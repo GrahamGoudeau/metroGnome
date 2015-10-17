@@ -2,7 +2,6 @@ var input,
     clickMp3,
     bpm,
     beatsPerMeasure,
-    currentBeatNumber,
     rectWidth = 100,
     setTempoTaps = [],
     initialTempoTap = null,
@@ -14,14 +13,13 @@ function preload() {
 }
 
 function setup() {
-    var canvas = createCanvas(windowWidth - 10, 400);
+    var canvas = createCanvas(windowWidth / 2, windowHeight / 4);
 
     numClicks = 0;
 
     canvas.parent('canvas');
 
     bpm = document.getElementById('bpmRange').value;
-    currentBeatNumber = 0;
     frameRate(bpm / 60);
     background(255);
 }
@@ -29,7 +27,8 @@ function setup() {
 function draw(doClick) {
     var beatsPerMeasure = document.getElementById('beatsPerMeasure').value,
         hasTimeSig = document.getElementById('hasTimeSig').checked,
-        multiple;
+        multiple,
+        scope = angular.element(document.getElementById('mainAngular')).scope();
 
     // clear the background on redraw
     background(255);
@@ -54,7 +53,8 @@ function draw(doClick) {
             for (multiple = 0; multiple < beatsPerMeasure; multiple++) {
                 line(width / beatsPerMeasure * multiple,
                      0,
-                     width / beatsPerMeasure * multiple, height);
+                     width / beatsPerMeasure * multiple,
+                     height);
             }
         }
         if (!hasTimeSig || !beatsPerMeasure) {
@@ -66,7 +66,13 @@ function draw(doClick) {
             clickMp3.amp(0.5);
         }
 
-        clickMp3.play();
+        if (hasTimeSig && beatsPerMeasure) {
+            scope.$apply(function () {
+                scope.updateClicks((numClicks % beatsPerMeasure) + 1);
+            });
+        }
+
+        //clickMp3.play();
         numClicks += 1;
     } else {
         beatsPerMeasure = 0;
